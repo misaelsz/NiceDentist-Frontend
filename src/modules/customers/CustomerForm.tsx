@@ -165,20 +165,45 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
     } catch (error: any) {
       console.error('Error saving customer:', error);
       
-      // Handle validation errors from backend
-      if (error.response?.status === 400 && error.response?.data?.errors) {
-        const backendErrors: Record<string, string> = {};
-        Object.keys(error.response.data.errors).forEach(key => {
-          backendErrors[key.toLowerCase()] = error.response.data.errors[key][0];
-        });
-        setErrors(backendErrors);
-      } else {
-        addNotification({
-          type: 'error',
-          title: 'Error',
-          message: `Failed to ${isEditing ? 'update' : 'create'} customer.`
-        });
+      // Handle specific error responses from backend
+      if (error.response?.status === 409) {
+        // Conflict - duplicate email
+        const errorData = error.response.data;
+        if (errorData?.code === 'DUPLICATE_EMAIL') {
+          setErrors({ email: 'This email address is already registered.' });
+          addNotification({
+            type: 'error',
+            title: 'Duplicate Email',
+            message: 'A customer with this email address already exists.'
+          });
+          return;
+        }
+      } else if (error.response?.status === 400) {
+        // Handle validation errors from backend
+        if (error.response?.data?.errors) {
+          const backendErrors: Record<string, string> = {};
+          Object.keys(error.response.data.errors).forEach(key => {
+            backendErrors[key.toLowerCase()] = error.response.data.errors[key][0];
+          });
+          setErrors(backendErrors);
+          return;
+        } else if (error.response?.data?.message) {
+          // Single error message
+          addNotification({
+            type: 'error',
+            title: 'Validation Error',
+            message: error.response.data.message
+          });
+          return;
+        }
       }
+      
+      // Generic error fallback
+      addNotification({
+        type: 'error',
+        title: 'Error',
+        message: `Failed to ${isEditing ? 'update' : 'create'} customer. Please try again.`
+      });
     }
   };
 
