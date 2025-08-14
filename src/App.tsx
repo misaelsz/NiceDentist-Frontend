@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { useNotification } from './hooks/useNotification';
 import { LoginForm } from './modules/auth/LoginForm';
-import { Dashboard } from './modules/dashboard/Dashboard';
+import { Layout } from './modules/layout/Layout';
 import { NotificationList } from './components/NotificationList';
 import './styles/global.css';
 
@@ -38,7 +38,7 @@ const AppContent: React.FC = () => {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <Layout />
             </ProtectedRoute>
           }
         />

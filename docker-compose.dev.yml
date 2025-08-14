@@ -1,0 +1,25 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: nicedentist-frontend-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/dist
+    environment:
+      - NODE_ENV=development
+      - VITE_AUTH_API_URL=http://localhost:8080
+      - VITE_MANAGER_API_URL=http://localhost:5001
+    networks:
+      - nicedentist-network
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+networks:
+  nicedentist-network:
+    external: true

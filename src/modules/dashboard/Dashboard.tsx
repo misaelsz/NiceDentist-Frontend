@@ -2,7 +2,11 @@ import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import './Dashboard.css';
 
-export const Dashboard: React.FC = () => {
+interface DashboardProps {
+  onNavigate?: (view: string) => void;
+}
+
+export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
   const { user, logout } = useAuth();
 
   const handleLogout = () => {
@@ -60,16 +64,28 @@ export const Dashboard: React.FC = () => {
         <div className="dashboard-section">
           <h2>Quick Actions</h2>
           <div className="quick-actions">
-            <button className="action-button">
+            <button 
+              className="action-button"
+              onClick={() => onNavigate?.('customers')}
+            >
               New Customer
             </button>
-            <button className="action-button">
+            <button 
+              className="action-button"
+              onClick={() => onNavigate?.('appointments')}
+            >
               Schedule Appointment
             </button>
-            <button className="action-button">
+            <button 
+              className="action-button"
+              onClick={() => onNavigate?.('dentists')}
+            >
               Register Dentist
             </button>
-            <button className="action-button">
+            <button 
+              className="action-button"
+              onClick={() => onNavigate?.('reports')}
+            >
               Reports
             </button>
           </div>

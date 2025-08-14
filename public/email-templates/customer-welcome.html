@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to NiceDentist - Account Created</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .email-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .content {
+            padding: 2rem;
+        }
+        
+        .welcome-message {
+            margin-bottom: 1.5rem;
+        }
+        
+        .welcome-message h2 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .welcome-message p {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .credentials-box {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .credentials-box h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .credentials-box h3::before {
+            content: "🔐";
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .credential-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .credential-label {
+            font-weight: 600;
+            color: #4a5568;
+        }
+        
+        .credential-value {
+            font-family: 'Courier New', monospace;
+            background: #edf2f7;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            color: #2d3748;
+            font-weight: 600;
+        }
+        
+        .security-note {
+            background: #fef5e7;
+            border-left: 4px solid #f6ad55;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .security-note h4 {
+            color: #c05621;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .security-note h4::before {
+            content: "⚠️";
+            margin-right: 0.5rem;
+        }
+        
+        .security-note p {
+            color: #9c4221;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .action-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);
+        }
+        
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .footer {
+            background: #f7fafc;
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .footer p {
+            color: #718096;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .footer .company-name {
+            font-weight: 600;
+            color: #4a5568;
+        }
+        
+        @media (max-width: 600px) {
+            .email-container {
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .content {
+                padding: 1.5rem;
+            }
+            
+            .credential-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>🦷 NiceDentist</h1>
+            <p>Your account has been created successfully!</p>
+        </div>
+        
+        <div class="content">
+            <div class="welcome-message">
+                <h2>Welcome, <span id="customerName">[Customer Name]</span>!</h2>
+                <p>
+                    We're excited to have you as part of the NiceDentist family! Your customer account has been created 
+                    and you can now access our platform to manage your dental appointments and view your treatment history.
+                </p>
+                <p>
+                    Below are your login credentials. Please keep this information secure and change your password 
+                    after your first login.
+                </p>
+            </div>
+            
+            <div class="credentials-box">
+                <h3>Your Login Credentials</h3>
+                <div class="credential-item">
+                    <span class="credential-label">Email/Username:</span>
+                    <span class="credential-value" id="userEmail">[customer@email.com]</span>
+                </div>
+                <div class="credential-item">
+                    <span class="credential-label">Temporary Password:</span>
+                    <span class="credential-value" id="tempPassword">[TEMP123]</span>
+                </div>
+            </div>
+            
+            <div class="security-note">
+                <h4>Security Notice</h4>
+                <p>
+                    This is a temporary password. For your security, you will be required to change this password 
+                    when you log in for the first time. Please choose a strong password that includes a mix of 
+                    letters, numbers, and special characters.
+                </p>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="#" class="action-button" id="loginButton" onclick="redirectToLogin()">
+                    Login to Your Account
+                </a>
+            </div>
+            
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0;">
+                <h3 style="color: #2d3748; margin-bottom: 1rem;">What's Next?</h3>
+                <ul style="color: #4a5568; line-height: 1.8; padding-left: 1.5rem;">
+                    <li>Log in using your credentials above</li>
+                    <li>Change your temporary password</li>
+                    <li>Complete your profile information</li>
+                    <li>Schedule your first appointment</li>
+                    <li>Explore our dental services</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>
+                If you have any questions or need assistance, please contact our support team.<br>
+                Thank you for choosing <span class="company-name">NiceDentist</span> for your dental care needs.
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.8rem;">
+                This is an automated message. Please do not reply to this email.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+        
+        // Function to redirect to login page
+        function redirectToLogin() {
+            const baseUrl = window.location.origin;
+            const email = getUrlParameter('email');
+            const password = getUrlParameter('password');
+            
+            // Build login URL with parameters
+            let loginUrl = `${baseUrl}:3000/login`;
+            if (email) {
+                loginUrl += `?email=${encodeURIComponent(email)}`;
+                if (password) {
+                    loginUrl += `&tempPassword=${encodeURIComponent(password)}`;
+                }
+            }
+            
+            window.open(loginUrl, '_blank');
+        }
+        
+        // Populate the template with URL parameters
+        document.addEventListener('DOMContentLoaded', function() {
+            const customerName = getUrlParameter('name') || '[Customer Name]';
+            const customerEmail = getUrlParameter('email') || '[customer@email.com]';
+            const tempPassword = getUrlParameter('password') || '[TEMP123]';
+            
+            document.getElementById('customerName').textContent = customerName;
+            document.getElementById('userEmail').textContent = customerEmail;
+            document.getElementById('tempPassword').textContent = tempPassword;
+            
+            // Update the login button href
+            const baseUrl = window.location.origin;
+            const loginUrl = `${baseUrl}:3000/login?email=${encodeURIComponent(customerEmail)}&tempPassword=${encodeURIComponent(tempPassword)}`;
+            document.getElementById('loginButton').href = loginUrl;
+        });
+    </script>
+</body>
+</html>
