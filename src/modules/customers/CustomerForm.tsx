@@ -135,7 +135,8 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
           email: formData.email,
           phone: formData.phone,
           dateOfBirth: formData.dateOfBirth || undefined,
-          address: formData.address || undefined
+          address: formData.address || undefined,
+          isActive: formData.isActive
         };
 
         await withLoading(customerService.update(customer.id, updateData));
