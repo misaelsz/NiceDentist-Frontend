@@ -1,0 +1,123 @@
+.notification-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 400px;
+  width: 100%;
+}
+
+.notification {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out;
+  position: relative;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.notification--success {
+  background: #f0fff4;
+  border-left: 4px solid #38a169;
+  color: #2f855a;
+}
+
+.notification--error {
+  background: #fed7d7;
+  border-left: 4px solid #e53e3e;
+  color: #c53030;
+}
+
+.notification--warning {
+  background: #fffaf0;
+  border-left: 4px solid #dd6b20;
+  color: #c05621;
+}
+
+.notification--info {
+  background: #ebf8ff;
+  border-left: 4px solid #3182ce;
+  color: #2c5282;
+}
+
+.notification-icon {
+  font-size: 1.25rem;
+  font-weight: bold;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.notification-message {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1rem;
+  color: currentColor;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  min-width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-close:hover {
+  opacity: 1;
+}
+
+@media (max-width: 480px) {
+  .notification-container {
+    left: 1rem;
+    right: 1rem;
+    max-width: none;
+  }
+  
+  .notification {
+    padding: 0.75rem;
+  }
+  
+  .notification-title {
+    font-size: 0.8rem;
+  }
+  
+  .notification-message {
+    font-size: 0.7rem;
+  }
+}
