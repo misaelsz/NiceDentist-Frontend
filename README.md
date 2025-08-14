@@ -361,12 +361,48 @@ npm run analyze
 ## 🚀 Deployment Options
 
 ### Docker
+
+#### Production Build
 ```bash
 # Build Docker image
 docker build -t nicedentist-frontend .
 
 # Run container
 docker run -p 3000:80 nicedentist-frontend
+
+# Using npm scripts
+npm run docker:build
+npm run docker:run
+```
+
+#### Development with Docker
+```bash
+# Build development image
+docker build -f Dockerfile.dev -t nicedentist-frontend-dev .
+
+# Run development container with hot reload
+docker run -p 3001:3000 -v "$(pwd):/app" -v /app/node_modules nicedentist-frontend-dev
+
+# Using npm scripts
+npm run docker:build-dev
+npm run docker:run-dev
+```
+
+#### Docker Compose
+```bash
+# Production
+docker-compose up -d
+
+# Development
+docker-compose --profile dev up -d
+
+# Stop services
+docker-compose down
+
+# Using npm scripts
+npm run docker:up        # Production
+npm run docker:up-dev    # Development
+npm run docker:down      # Stop
 ```
 
 ### Static Hosting

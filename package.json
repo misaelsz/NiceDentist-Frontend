@@ -7,7 +7,17 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docker:build": "docker build -t nicedentist-frontend .",
+    "docker:build-dev": "docker build -f Dockerfile.dev -t nicedentist-frontend-dev .",
+    "docker:run": "docker run -p 3000:80 nicedentist-frontend",
+    "docker:run-dev": "docker run -p 3001:3000 -v \"$(pwd):/app\" -v /app/node_modules nicedentist-frontend-dev",
+    "docker:up": "docker-compose up -d",
+    "docker:up-dev": "docker-compose --profile dev up -d",
+    "docker:down": "docker-compose down",
+    "docker:up-standalone": "docker-compose -f docker-compose.standalone.yml up -d",
+    "docker:up-standalone-dev": "docker-compose -f docker-compose.standalone.yml --profile dev up -d",
+    "docker:down-standalone": "docker-compose -f docker-compose.standalone.yml down"
   },
   "dependencies": {
     "react": "^18.2.0",

@@ -13,7 +13,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   if (isLoading) {
     return (
       <div className="loading-container">
-        <div className="loading-spinner">Carregando...</div>
+        <div className="loading-spinner">Loading...</div>
       </div>
     );
   }

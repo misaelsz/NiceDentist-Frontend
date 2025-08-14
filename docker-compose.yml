@@ -1,0 +1,45 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nicedentist-frontend
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_AUTH_API_URL=http://localhost:5000
+      - VITE_MANAGER_API_URL=http://localhost:5001
+    networks:
+      - nicedentist-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Development service (alternative)
+  frontend-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: nicedentist-frontend-dev
+    ports:
+      - "3001:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - VITE_AUTH_API_URL=http://localhost:5000
+      - VITE_MANAGER_API_URL=http://localhost:5001
+    networks:
+      - nicedentist-network
+    profiles:
+      - dev
+
+networks:
+  nicedentist-network:
+    external: true
