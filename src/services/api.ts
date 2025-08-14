@@ -32,7 +32,8 @@ const addAuthInterceptor = (apiInstance: any) => {
         localStorage.removeItem('user');
         window.location.href = '/login';
       }
-      return Promise.reject(new Error(error.message || 'API Error'));
+      // Return the original error to preserve response data
+      return Promise.reject(error);
     }
   );
 };

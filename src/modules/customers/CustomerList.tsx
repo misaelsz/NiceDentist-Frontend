@@ -18,17 +18,26 @@ export const CustomerList: React.FC<CustomerListProps> = ({
 }) => {
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [pageSize] = useState(10);
   const { addNotification } = useNotification();
   const { isLoading, withLoading } = useLoading();
 
-  const fetchCustomers = async () => {
+  const fetchCustomers = async (showLoading = true) => {
     try {
-      const result = await customerService.getAll(currentPage, pageSize, searchTerm);
-      setCustomers(result.data || result.items || []);
-      setTotalPages(Math.ceil((result.total || result.totalCount || 0) / pageSize));
+      const fetchOperation = async () => {
+        const result = await customerService.getAll(currentPage, pageSize, debouncedSearchTerm);
+        setCustomers(result.data || result.items || []);
+        setTotalPages(Math.ceil((result.total || result.totalCount || 0) / pageSize));
+      };
+
+      if (showLoading) {
+        await withLoading(fetchOperation());
+      } else {
+        await fetchOperation();
+      }
     } catch (error) {
       console.error('Error fetching customers:', error);
       addNotification({
@@ -39,15 +48,25 @@ export const CustomerList: React.FC<CustomerListProps> = ({
     }
   };
 
+  // Debounce search term
   useEffect(() => {
-    withLoading(fetchCustomers());
-  }, [currentPage, searchTerm, refreshTrigger]);
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+      setCurrentPage(1); // Reset to first page when searching
+    }, 300); // Reduzido para 300ms para ser mais responsivo
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    setCurrentPage(1);
-    withLoading(fetchCustomers());
-  };
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  // Initial load and page changes with loading
+  useEffect(() => {
+    fetchCustomers(true);
+  }, [currentPage, refreshTrigger]);
+
+  // Search changes without loading indicator to avoid re-renders
+  useEffect(() => {
+    fetchCustomers(false);
+  }, [debouncedSearchTerm]);
 
   const handleDelete = async (id: number, name: string) => {
     if (!window.confirm(`Are you sure you want to delete customer "${name}"?`)) {
@@ -90,7 +109,7 @@ export const CustomerList: React.FC<CustomerListProps> = ({
       </div>
 
       <div className="customer-search">
-        <form onSubmit={handleSearch}>
+        <form onSubmit={(e) => e.preventDefault()}>
           <input
             type="text"
             placeholder="Search customers by name or email..."
@@ -99,7 +118,7 @@ export const CustomerList: React.FC<CustomerListProps> = ({
             className="search-input"
             disabled={isLoading}
           />
-          <button type="submit" className="search-button" disabled={isLoading}>
+          <button type="button" className="search-button" disabled={isLoading}>
             Search
           </button>
         </form>
