@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { LoginRequest, AuthResponse } from '../types';
 
-const API_BASE_URL = import.meta.env.VITE_AUTH_API_URL || 'http://localhost:5000'; // Auth API
-const MANAGER_API_URL = import.meta.env.VITE_MANAGER_API_URL || 'http://localhost:5001'; // Manager API
+const API_BASE_URL = import.meta.env.VITE_AUTH_API_URL || 'http://localhost:5000/api'; // Auth API
+const MANAGER_API_URL = import.meta.env.VITE_MANAGER_API_URL || 'http://localhost:5001/api'; // Manager API
 
 // Create axios instances
 export const authApi = axios.create({
@@ -44,12 +44,12 @@ addAuthInterceptor(managerApi);
 // Auth API Services
 export const authService = {
   login: async (credentials: LoginRequest): Promise<AuthResponse> => {
-    const response = await authApi.post('/api/auth/login', credentials);
+    const response = await authApi.post('/auth/login', credentials);
     return response.data;
   },
 
   register: async (userData: any) => {
-    const response = await authApi.post('/api/auth/register', userData);
+    const response = await authApi.post('/auth/register', userData);
     return response.data;
   },
 
@@ -62,56 +62,56 @@ export const authService = {
 // Manager API Services
 export const customerService = {
   getAll: async (page = 1, pageSize = 10, search = '') => {
-    const response = await managerApi.get('/api/customers', {
+    const response = await managerApi.get('/customers', {
       params: { page, pageSize, search }
     });
     return response.data;
   },
 
   getById: async (id: number) => {
-    const response = await managerApi.get(`/api/customers/${id}`);
+    const response = await managerApi.get(`/customers/${id}`);
     return response.data;
   },
 
   create: async (customer: any) => {
-    const response = await managerApi.post('/api/customers', customer);
+    const response = await managerApi.post('/customers', customer);
     return response.data;
   },
 
   update: async (id: number, customer: any) => {
-    const response = await managerApi.put(`/api/customers/${id}`, customer);
+    const response = await managerApi.put(`/customers/${id}`, customer);
     return response.data;
   },
 
   delete: async (id: number) => {
-    const response = await managerApi.delete(`/api/customers/${id}`);
+    const response = await managerApi.delete(`/customers/${id}`);
     return response.data;
   }
 };
 
 export const appointmentService = {
   getAll: async (params: any = {}) => {
-    const response = await managerApi.get('/api/appointments', { params });
+    const response = await managerApi.get('/appointments', { params });
     return response.data;
   },
 
   getById: async (id: number) => {
-    const response = await managerApi.get(`/api/appointments/${id}`);
+    const response = await managerApi.get(`/appointments/${id}`);
     return response.data;
   },
 
   create: async (appointment: any) => {
-    const response = await managerApi.post('/api/appointments', appointment);
+    const response = await managerApi.post('/appointments', appointment);
     return response.data;
   },
 
   update: async (id: number, appointment: any) => {
-    const response = await managerApi.put(`/api/appointments/${id}`, appointment);
+    const response = await managerApi.put(`/appointments/${id}`, appointment);
     return response.data;
   },
 
   delete: async (id: number) => {
-    const response = await managerApi.delete(`/api/appointments/${id}`);
+    const response = await managerApi.delete(`/appointments/${id}`);
     return response.data;
   }
 };
@@ -120,29 +120,29 @@ export const appointmentService = {
 // Dentist API Services
 export const dentistService = {
   list: async (page = 1, pageSize = 10, search = '') => {
-    const response = await managerApi.get('/api/dentists', {
+    const response = await managerApi.get('/dentists', {
       params: { page, pageSize, search }
     });
     return response.data;
   },
 
   getById: async (id: number) => {
-    const response = await managerApi.get(`/api/dentists/${id}`);
+    const response = await managerApi.get(`/dentists/${id}`);
     return response.data;
   },
 
   create: async (dentist: any) => {
-    const response = await managerApi.post('/api/dentists', dentist);
+    const response = await managerApi.post('/dentists', dentist);
     return response.data;
   },
 
   update: async (id: number, dentist: any) => {
-    const response = await managerApi.put(`/api/dentists/${id}`, dentist);
+    const response = await managerApi.put(`/dentists/${id}`, dentist);
     return response.data;
   },
 
   delete: async (id: number) => {
-    const response = await managerApi.delete(`/api/dentists/${id}`);
+    const response = await managerApi.delete(`/dentists/${id}`);
     return response.data;
   }
 };

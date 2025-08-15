@@ -82,12 +82,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             >
               Register Dentist
             </button>
-            <button 
-              className="action-button"
-              onClick={() => onNavigate?.('reports')}
-            >
-              Reports
-            </button>
           </div>
         </div>
       </main>

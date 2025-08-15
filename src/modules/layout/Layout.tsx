@@ -3,9 +3,10 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Dashboard } from '../dashboard/Dashboard';
 import { CustomerManagement } from '../customers/CustomerManagement';
 import { DentistManagement } from '../dentists/DentistManagement';
+import { AppointmentManagement } from '../appointments/AppointmentManagement';
 import './Layout.css';
 
-type ActiveView = 'dashboard' | 'customers' | 'appointments' | 'dentists' | 'reports';
+type ActiveView = 'dashboard' | 'customers' | 'appointments' | 'dentists';
 
 export const Layout: React.FC = () => {
   const { user, logout } = useAuth();
@@ -22,11 +23,9 @@ export const Layout: React.FC = () => {
       case 'customers':
         return <CustomerManagement />;
       case 'appointments':
-        return <div className="coming-soon">Appointments Management - Coming Soon</div>;
+        return <AppointmentManagement />;
       case 'dentists':
         return <DentistManagement />;
-      case 'reports':
-        return <div className="coming-soon">Reports - Coming Soon</div>;
       default:
         return <Dashboard onNavigate={(view) => setActiveView(view as ActiveView)} />;
     }
@@ -78,15 +77,6 @@ export const Layout: React.FC = () => {
             >
               <span className="nav-icon">🦷</span>
               Dentists
-            </button>
-          </li>
-          <li>
-            <button 
-              className={`nav-item ${activeView === 'reports' ? 'active' : ''}`}
-              onClick={() => setActiveView('reports')}
-            >
-              <span className="nav-icon">📈</span>
-              Reports
             </button>
           </li>
         </ul>

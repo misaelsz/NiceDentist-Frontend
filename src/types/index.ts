@@ -71,3 +71,6 @@ export interface Dentist {
   isActive: boolean;
   userId: number | null;
 }
+
+// Re-export appointment types
+export * from './appointment';
