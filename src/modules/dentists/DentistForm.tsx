@@ -167,14 +167,23 @@ export const DentistForm: React.FC<DentistFormProps> = ({
       
       // Handle specific error responses from backend
       if (error.response?.status === 409) {
-        // Conflict - duplicate email
+        // Conflict - duplicate data
         const errorData = error.response.data;
+        
         if (errorData?.code === 'DUPLICATE_EMAIL') {
           setErrors({ email: 'This email address is already registered.' });
           addNotification({
             type: 'error',
             title: 'Duplicate Email',
             message: 'A dentist with this email address already exists.'
+          });
+          return;
+        } else if (errorData?.code === 'DUPLICATE_LICENSE') {
+          setErrors({ licenseNumber: 'This license number is already registered.' });
+          addNotification({
+            type: 'error',
+            title: 'Duplicate License Number',
+            message: 'A dentist with this license number already exists.'
           });
           return;
         }
