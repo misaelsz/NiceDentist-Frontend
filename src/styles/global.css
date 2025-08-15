@@ -50,3 +50,101 @@ body {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+/* Mobile Responsiveness - Global Improvements */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px; /* Prevent iOS zoom on form inputs */
+  }
+
+  /* Better touch targets */
+  button, input, select, textarea {
+    min-height: 44px; /* iOS recommended touch target */
+    font-size: 16px; /* Prevent iOS zoom */
+  }
+
+  /* Improved table responsiveness */
+  table {
+    font-size: 0.9rem;
+  }
+
+  /* Better spacing for mobile */
+  .container, .content, .main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Form improvements */
+  form {
+    width: 100%;
+  }
+
+  /* Modal improvements for mobile */
+  .modal, .dialog {
+    margin: 1rem;
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100vh - 2rem);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small screens */
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+  h3 { font-size: 1.125rem; }
+
+  /* Better button sizing */
+  button {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  /* Card spacing improvements */
+  .card, .panel, .section {
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  button:hover, .button:hover, a:hover {
+    transform: none !important;
+  }
+
+  /* Better active states for touch */
+  button:active, .button:active {
+    transform: scale(0.98);
+    transition: transform 0.1s;
+  }
+}
+
+/* Safe area for devices with notches */
+@supports (padding: max(0px)) {
+  .app {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Landscape phone optimization */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .header, .app-header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+  
+  .dashboard-card {
+    padding: 0.75rem !important;
+  }
+  
+  .card-number {
+    font-size: 1.25rem !important;
+  }
+}
