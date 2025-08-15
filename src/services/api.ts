@@ -115,3 +115,34 @@ export const appointmentService = {
     return response.data;
   }
 };
+
+
+// Dentist API Services
+export const dentistService = {
+  list: async (page = 1, pageSize = 10, search = '') => {
+    const response = await managerApi.get('/api/dentists', {
+      params: { page, pageSize, search }
+    });
+    return response.data;
+  },
+
+  getById: async (id: number) => {
+    const response = await managerApi.get(`/api/dentists/${id}`);
+    return response.data;
+  },
+
+  create: async (dentist: any) => {
+    const response = await managerApi.post('/api/dentists', dentist);
+    return response.data;
+  },
+
+  update: async (id: number, dentist: any) => {
+    const response = await managerApi.put(`/api/dentists/${id}`, dentist);
+    return response.data;
+  },
+
+  delete: async (id: number) => {
+    const response = await managerApi.delete(`/api/dentists/${id}`);
+    return response.data;
+  }
+};

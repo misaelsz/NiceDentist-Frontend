@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Dashboard } from '../dashboard/Dashboard';
 import { CustomerManagement } from '../customers/CustomerManagement';
+import { DentistManagement } from '../dentists/DentistManagement';
 import './Layout.css';
 
 type ActiveView = 'dashboard' | 'customers' | 'appointments' | 'dentists' | 'reports';
@@ -23,7 +24,7 @@ export const Layout: React.FC = () => {
       case 'appointments':
         return <div className="coming-soon">Appointments Management - Coming Soon</div>;
       case 'dentists':
-        return <div className="coming-soon">Dentist Management - Coming Soon</div>;
+        return <DentistManagement />;
       case 'reports':
         return <div className="coming-soon">Reports - Coming Soon</div>;
       default:

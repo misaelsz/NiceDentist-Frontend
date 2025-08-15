@@ -69,4 +69,5 @@ export interface Dentist {
   createdAt: string;
   updatedAt: string;
   isActive: boolean;
+  userId: number | null;
 }
