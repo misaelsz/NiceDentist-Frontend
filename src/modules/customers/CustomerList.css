@@ -301,14 +301,16 @@
     max-width: 100%;
   }
 
-  /* Hide table on mobile */
+  /* FORCE Hide table on mobile */
   .customer-table {
-    display: none;
+    display: none !important;
   }
   
-  /* Show cards on mobile */
+  /* FORCE Show cards on mobile */
   .customer-cards {
-    display: block;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
   }
 
   .pagination {
@@ -323,7 +325,7 @@
   }
 }
 
-/* Mobile card layout */
+/* Mobile card layout - Initially hidden, shown on mobile */
 .customer-cards {
   display: none;
   gap: 1rem;

@@ -313,14 +313,16 @@
     max-width: 100%;
   }
 
-  /* Hide table on mobile */
+  /* FORCE Hide table on mobile */
   .dentist-table {
-    display: none;
+    display: none !important;
   }
   
-  /* Show cards on mobile */
+  /* FORCE Show cards on mobile */
   .dentist-cards {
-    display: block;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
   }
 
   .pagination {
@@ -335,7 +337,7 @@
   }
 }
 
-/* Mobile card layout */
+/* Mobile card layout - Initially hidden, shown on mobile */
 .dentist-cards {
   display: none;
   gap: 1rem;

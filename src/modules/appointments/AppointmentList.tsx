@@ -188,75 +188,77 @@ export const AppointmentList: React.FC<AppointmentListProps> = ({ onEdit, onNew 
                 ))}
               </tbody>
             </table>
-
-            {/* Mobile Cards View */}
-            <div className="appointment-cards">
-              {appointments.map((appointment) => (
-                <div key={appointment.id} className="appointment-card">
-                  <div className="appointment-card-header">
-                    <div className="appointment-card-date">
-                      {formatDateTime(appointment.appointmentDateTime)}
-                    </div>
-                    <div className="appointment-card-status">
-                      <span className={`status ${getStatusClass(appointment.status)}`}>
-                        {appointment.status}
-                      </span>
-                    </div>
-                  </div>
-                  
-                  <div className="appointment-card-body">
-                    <div className="appointment-card-row">
-                      <span className="appointment-card-label">Customer:</span>
-                      <span className="appointment-card-value">{appointment.customerName}</span>
-                    </div>
-                    <div className="appointment-card-row">
-                      <span className="appointment-card-label">Dentist:</span>
-                      <span className="appointment-card-value">{appointment.dentistName}</span>
-                    </div>
-                    <div className="appointment-card-row">
-                      <span className="appointment-card-label">Procedure:</span>
-                      <span className="appointment-card-value">{appointment.procedureType}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="appointment-card-actions">
-                    <button
-                      className="btn btn-sm btn-secondary"
-                      onClick={() => onEdit?.(appointment)}
-                    >
-                      Edit
-                    </button>
-                    
-                    {appointment.status === AppointmentStatus.Scheduled && (
-                      <>
-                        <button
-                          className="btn btn-sm btn-success"
-                          onClick={() => handleStatusChange(appointment.id, AppointmentStatus.Completed)}
-                        >
-                          Complete
-                        </button>
-                        <button
-                          className="btn btn-sm btn-warning"
-                          onClick={() => handleStatusChange(appointment.id, AppointmentStatus.Cancelled)}
-                        >
-                          Cancel
-                        </button>
-                      </>
-                    )}
-                    
-                    <button
-                      className="btn btn-sm btn-danger"
-                      onClick={() => handleDelete(appointment.id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
           </>
         )}
       </div>
+
+      {/* Mobile Cards View - Outside table container */}
+      {appointments.length > 0 && (
+        <div className="appointment-cards">
+          {appointments.map((appointment) => (
+            <div key={appointment.id} className="appointment-card">
+              <div className="appointment-card-header">
+                <div className="appointment-card-date">
+                  {formatDateTime(appointment.appointmentDateTime)}
+                </div>
+                <div className="appointment-card-status">
+                  <span className={`status ${getStatusClass(appointment.status)}`}>
+                    {appointment.status}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="appointment-card-body">
+                <div className="appointment-card-row">
+                  <span className="appointment-card-label">Customer:</span>
+                  <span className="appointment-card-value">{appointment.customerName}</span>
+                </div>
+                <div className="appointment-card-row">
+                  <span className="appointment-card-label">Dentist:</span>
+                  <span className="appointment-card-value">{appointment.dentistName}</span>
+                </div>
+                <div className="appointment-card-row">
+                  <span className="appointment-card-label">Procedure:</span>
+                  <span className="appointment-card-value">{appointment.procedureType}</span>
+                </div>
+              </div>
+              
+              <div className="appointment-card-actions">
+                <button
+                  className="btn btn-sm btn-secondary"
+                  onClick={() => onEdit?.(appointment)}
+                >
+                  Edit
+                </button>
+                
+                {appointment.status === AppointmentStatus.Scheduled && (
+                  <>
+                    <button
+                      className="btn btn-sm btn-success"
+                      onClick={() => handleStatusChange(appointment.id, AppointmentStatus.Completed)}
+                    >
+                      Complete
+                    </button>
+                    <button
+                      className="btn btn-sm btn-warning"
+                      onClick={() => handleStatusChange(appointment.id, AppointmentStatus.Cancelled)}
+                    >
+                      Cancel
+                    </button>
+                  </>
+                )}
+                
+                <button
+                  className="btn btn-sm btn-danger"
+                  onClick={() => handleDelete(appointment.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

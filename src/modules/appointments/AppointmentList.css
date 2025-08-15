@@ -258,23 +258,30 @@
     min-width: 100%;
   }
   
-  /* Hide table on mobile and show cards instead */
+  /* FORCE Hide table on mobile and show cards instead */
   .appointment-table-container {
-    display: none;
+    display: none !important;
   }
   
   .appointment-cards {
-    display: block;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
   }
 }
 
+/* Desktop: Hide cards, show table */
 @media (min-width: 769px) {
   .appointment-cards {
-    display: none;
+    display: none !important;
+  }
+  
+  .appointment-table-container {
+    display: block !important;
   }
 }
 
-/* Mobile card layout */
+/* Mobile card layout - Hidden by default, shown on mobile via media query above */
 .appointment-cards {
   display: none;
   gap: 15px;
