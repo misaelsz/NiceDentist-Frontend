@@ -98,7 +98,7 @@ export const CustomerList: React.FC<CustomerListProps> = ({
   return (
     <div className="customer-list">
       <div className="customer-list-header">
-        <h2>Customer Management (Live Reload!)</h2>
+        <h2>Customer Management</h2>
         <button 
           className="create-button" 
           onClick={onCreateNew}
