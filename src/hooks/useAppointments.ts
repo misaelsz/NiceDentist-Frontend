@@ -92,12 +92,38 @@ export const useAppointments = (filters?: AppointmentFilters) => {
     }
   };
 
-  const cancelAppointment = async (id: number): Promise<boolean> => {
-    return updateAppointmentStatus(id, AppointmentStatus.Cancelled);
+  const cancelAppointment = async (id: number, reason?: string): Promise<boolean> => {
+    setLoading(true);
+    setError(null);
+    try {
+      const updatedAppointment = await appointmentService.cancelAppointment(id, reason);
+      setAppointments(prev => 
+        prev.map(a => a.id === updatedAppointment.id ? updatedAppointment : a)
+      );
+      return true;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error cancelling appointment');
+      return false;
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const completeAppointment = async (id: number): Promise<boolean> => {
-    return updateAppointmentStatus(id, AppointmentStatus.Completed);
+  const completeAppointment = async (id: number, notes?: string): Promise<boolean> => {
+    setLoading(true);
+    setError(null);
+    try {
+      const updatedAppointment = await appointmentService.completeAppointment(id, notes);
+      setAppointments(prev => 
+        prev.map(a => a.id === updatedAppointment.id ? updatedAppointment : a)
+      );
+      return true;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error completing appointment');
+      return false;
+    } finally {
+      setLoading(false);
+    }
   };
 
   const requestCancellation = async (id: number): Promise<boolean> => {

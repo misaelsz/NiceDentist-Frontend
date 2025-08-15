@@ -147,6 +147,7 @@ export const DentistList: React.FC<DentistListProps> = ({
 
       {!isLoading && dentists.length > 0 && (
         <>
+          {/* Desktop Table View */}
           <div className="dentist-table">
             <table>
               <thead>
@@ -197,6 +198,58 @@ export const DentistList: React.FC<DentistListProps> = ({
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Mobile Cards View */}
+          <div className="dentist-cards">
+            {dentists.map((dentist) => (
+              <div key={dentist.id} className="dentist-card">
+                <div className="dentist-card-header">
+                  <h3 className="dentist-card-name">{dentist.name}</h3>
+                  <span className={`status ${dentist.isActive ? 'active' : 'inactive'}`}>
+                    {dentist.isActive ? 'Active' : 'Inactive'}
+                  </span>
+                </div>
+                
+                <div className="dentist-card-body">
+                  <div className="dentist-card-row">
+                    <span className="dentist-card-label">Email:</span>
+                    <span className="dentist-card-value">{dentist.email}</span>
+                  </div>
+                  <div className="dentist-card-row">
+                    <span className="dentist-card-label">Phone:</span>
+                    <span className="dentist-card-value">{dentist.phone}</span>
+                  </div>
+                  <div className="dentist-card-row">
+                    <span className="dentist-card-label">CRO:</span>
+                    <span className="dentist-card-value">{dentist.licenseNumber}</span>
+                  </div>
+                  <div className="dentist-card-row">
+                    <span className="dentist-card-label">Specialization:</span>
+                    <span className="dentist-card-value">{dentist.specialization}</span>
+                  </div>
+                </div>
+                
+                <div className="dentist-card-actions">
+                  <button
+                    className="edit-button"
+                    onClick={() => onEdit && onEdit(dentist)}
+                    disabled={isLoading}
+                    title="Edit dentist"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className={`delete-button ${dentist.isActive ? 'deactivate' : 'activate'}`}
+                    onClick={() => handleSoftDelete(dentist)}
+                    disabled={isLoading}
+                    title={dentist.isActive ? 'Deactivate dentist' : 'Activate dentist'}
+                  >
+                    {dentist.isActive ? 'Deactivate' : 'Activate'}
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
 
           {totalPages > 1 && (

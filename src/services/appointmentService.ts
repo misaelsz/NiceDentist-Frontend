@@ -63,7 +63,7 @@ export class AppointmentService {
   }
 
   async updateAppointmentStatus(id: number, status: AppointmentStatus): Promise<Appointment> {
-    const response = await managerApi.patch<Appointment>(`/appointments/${id}/status`, { status });
+    const response = await managerApi.put<Appointment>(`/appointments/${id}/status`, { status });
     return response.data;
   }
 
@@ -71,15 +71,15 @@ export class AppointmentService {
     await managerApi.delete(`/appointments/${id}`);
   }
 
-  async cancelAppointment(id: number): Promise<void> {
-    await managerApi.patch<void>(`/appointments/${id}/cancel`, {});
+  async cancelAppointment(id: number, reason?: string): Promise<Appointment> {
+    const response = await managerApi.put<Appointment>(`/appointments/${id}/cancel`, { reason });
+    return response.data;
   }
 
-  async completeAppointment(id: number): Promise<void> {
-    await managerApi.patch<void>(`/appointments/${id}/complete`, {});
+  async completeAppointment(id: number, notes?: string): Promise<Appointment> {
+    const response = await managerApi.put<Appointment>(`/appointments/${id}/complete`, { notes });
+    return response.data;
   }
 
-  async requestCancellation(id: number): Promise<void> {
-    await managerApi.patch<void>(`/appointments/${id}/request-cancellation`, {});
-  }
+
 }

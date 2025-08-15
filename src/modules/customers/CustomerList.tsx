@@ -141,6 +141,7 @@ export const CustomerList: React.FC<CustomerListProps> = ({
 
       {!isLoading && customers.length > 0 && (
         <>
+          {/* Desktop Table View */}
           <div className="customer-table">
             <table>
               <thead>
@@ -194,6 +195,61 @@ export const CustomerList: React.FC<CustomerListProps> = ({
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Mobile Cards View */}
+          <div className="customer-cards">
+            {customers.map((customer) => (
+              <div key={customer.id} className="customer-card">
+                <div className="customer-card-header">
+                  <h3 className="customer-card-name">{customer.name}</h3>
+                  <span className={`status ${customer.isActive ? 'active' : 'inactive'}`}>
+                    {customer.isActive ? 'Active' : 'Inactive'}
+                  </span>
+                </div>
+                
+                <div className="customer-card-body">
+                  <div className="customer-card-row">
+                    <span className="customer-card-label">Email:</span>
+                    <span className="customer-card-value">{customer.email}</span>
+                  </div>
+                  <div className="customer-card-row">
+                    <span className="customer-card-label">Phone:</span>
+                    <span className="customer-card-value">{customer.phone}</span>
+                  </div>
+                  <div className="customer-card-row">
+                    <span className="customer-card-label">Date of Birth:</span>
+                    <span className="customer-card-value">
+                      {customer.dateOfBirth 
+                        ? formatDate(customer.dateOfBirth)
+                        : 'Not provided'
+                      }
+                    </span>
+                  </div>
+                  <div className="customer-card-row">
+                    <span className="customer-card-label">Registered:</span>
+                    <span className="customer-card-value">{formatDate(customer.createdAt)}</span>
+                  </div>
+                </div>
+                
+                <div className="customer-card-actions">
+                  <button
+                    className="edit-button"
+                    onClick={() => onEdit(customer)}
+                    disabled={isLoading}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDelete(customer.id, customer.name)}
+                    disabled={isLoading}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
 
           {totalPages > 1 && (

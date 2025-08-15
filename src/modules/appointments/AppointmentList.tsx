@@ -125,67 +125,136 @@ export const AppointmentList: React.FC<AppointmentListProps> = ({ onEdit, onNew 
             </button>
           </div>
         ) : (
-          <table className="appointment-table">
-            <thead>
-              <tr>
-                <th>Date & Time</th>
-                <th>Customer</th>
-                <th>Dentist</th>
-                <th>Procedure</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {appointments.map((appointment) => (
-                <tr key={appointment.id}>
-                  <td>{formatDateTime(appointment.appointmentDateTime)}</td>
-                  <td>{appointment.customerName}</td>
-                  <td>{appointment.dentistName}</td>
-                  <td>{appointment.procedureType}</td>
-                  <td>
-                    <span className={`status ${getStatusClass(appointment.status)}`}>
-                      {appointment.status}
-                    </span>
-                  </td>
-                  <td>
-                    <div className="actions">
-                      <button
-                        className="btn btn-sm btn-secondary"
-                        onClick={() => onEdit?.(appointment)}
-                      >
-                        Edit
-                      </button>
-                      
-                      {appointment.status === AppointmentStatus.Scheduled && (
-                        <>
-                          <button
-                            className="btn btn-sm btn-success"
-                            onClick={() => handleStatusChange(appointment.id, AppointmentStatus.Completed)}
-                          >
-                            Complete
-                          </button>
-                          <button
-                            className="btn btn-sm btn-warning"
-                            onClick={() => handleStatusChange(appointment.id, AppointmentStatus.Cancelled)}
-                          >
-                            Cancel
-                          </button>
-                        </>
-                      )}
-                      
-                      <button
-                        className="btn btn-sm btn-danger"
-                        onClick={() => handleDelete(appointment.id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </td>
+          <>
+            {/* Desktop Table View */}
+            <table className="appointment-table">
+              <thead>
+                <tr>
+                  <th>Date & Time</th>
+                  <th>Customer</th>
+                  <th>Dentist</th>
+                  <th>Procedure</th>
+                  <th>Status</th>
+                  <th>Actions</th>
                 </tr>
+              </thead>
+              <tbody>
+                {appointments.map((appointment) => (
+                  <tr key={appointment.id}>
+                    <td>{formatDateTime(appointment.appointmentDateTime)}</td>
+                    <td>{appointment.customerName}</td>
+                    <td>{appointment.dentistName}</td>
+                    <td>{appointment.procedureType}</td>
+                    <td>
+                      <span className={`status ${getStatusClass(appointment.status)}`}>
+                        {appointment.status}
+                      </span>
+                    </td>
+                    <td>
+                      <div className="actions">
+                        <button
+                          className="btn btn-sm btn-secondary"
+                          onClick={() => onEdit?.(appointment)}
+                        >
+                          Edit
+                        </button>
+                        
+                        {appointment.status === AppointmentStatus.Scheduled && (
+                          <>
+                            <button
+                              className="btn btn-sm btn-success"
+                              onClick={() => handleStatusChange(appointment.id, AppointmentStatus.Completed)}
+                            >
+                              Complete
+                            </button>
+                            <button
+                              className="btn btn-sm btn-warning"
+                              onClick={() => handleStatusChange(appointment.id, AppointmentStatus.Cancelled)}
+                            >
+                              Cancel
+                            </button>
+                          </>
+                        )}
+                        
+                        <button
+                          className="btn btn-sm btn-danger"
+                          onClick={() => handleDelete(appointment.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            {/* Mobile Cards View */}
+            <div className="appointment-cards">
+              {appointments.map((appointment) => (
+                <div key={appointment.id} className="appointment-card">
+                  <div className="appointment-card-header">
+                    <div className="appointment-card-date">
+                      {formatDateTime(appointment.appointmentDateTime)}
+                    </div>
+                    <div className="appointment-card-status">
+                      <span className={`status ${getStatusClass(appointment.status)}`}>
+                        {appointment.status}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="appointment-card-body">
+                    <div className="appointment-card-row">
+                      <span className="appointment-card-label">Customer:</span>
+                      <span className="appointment-card-value">{appointment.customerName}</span>
+                    </div>
+                    <div className="appointment-card-row">
+                      <span className="appointment-card-label">Dentist:</span>
+                      <span className="appointment-card-value">{appointment.dentistName}</span>
+                    </div>
+                    <div className="appointment-card-row">
+                      <span className="appointment-card-label">Procedure:</span>
+                      <span className="appointment-card-value">{appointment.procedureType}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="appointment-card-actions">
+                    <button
+                      className="btn btn-sm btn-secondary"
+                      onClick={() => onEdit?.(appointment)}
+                    >
+                      Edit
+                    </button>
+                    
+                    {appointment.status === AppointmentStatus.Scheduled && (
+                      <>
+                        <button
+                          className="btn btn-sm btn-success"
+                          onClick={() => handleStatusChange(appointment.id, AppointmentStatus.Completed)}
+                        >
+                          Complete
+                        </button>
+                        <button
+                          className="btn btn-sm btn-warning"
+                          onClick={() => handleStatusChange(appointment.id, AppointmentStatus.Cancelled)}
+                        >
+                          Cancel
+                        </button>
+                      </>
+                    )}
+                    
+                    <button
+                      className="btn btn-sm btn-danger"
+                      onClick={() => handleDelete(appointment.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
               ))}
-            </tbody>
-          </table>
+            </div>
+          </>
         )}
       </div>
     </div>

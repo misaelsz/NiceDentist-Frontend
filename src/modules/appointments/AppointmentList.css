@@ -220,9 +220,21 @@
 }
 
 /* Responsive design */
+@media (max-width: 1200px) {
+  .filters {
+    flex-wrap: wrap;
+  }
+  
+  .filter-group select,
+  .filter-group input {
+    min-width: 120px;
+  }
+}
+
 @media (max-width: 768px) {
   .appointment-list {
     padding: 15px;
+    margin: 0;
   }
   
   .appointment-list-header {
@@ -231,27 +243,130 @@
     align-items: stretch;
   }
   
+  .appointment-list-header h2 {
+    font-size: 1.3rem;
+  }
+  
   .filters {
     flex-direction: column;
     gap: 15px;
+    padding: 12px;
   }
   
-  .appointment-table {
-    font-size: 14px;
+  .filter-group select,
+  .filter-group input {
+    min-width: 100%;
   }
   
-  .appointment-table th,
-  .appointment-table td {
-    padding: 8px;
+  /* Hide table on mobile and show cards instead */
+  .appointment-table-container {
+    display: none;
   }
   
-  .actions {
-    flex-direction: column;
-    gap: 4px;
+  .appointment-cards {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .appointment-cards {
+    display: none;
+  }
+}
+
+/* Mobile card layout */
+.appointment-cards {
+  display: none;
+  gap: 15px;
+}
+
+.appointment-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.appointment-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.appointment-card-date {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.appointment-card-status {
+  margin-left: auto;
+}
+
+.appointment-card-body {
+  margin-bottom: 15px;
+}
+
+.appointment-card-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.appointment-card-label {
+  font-weight: 500;
+  color: #666;
+}
+
+.appointment-card-value {
+  color: #333;
+  text-align: right;
+  flex: 1;
+  margin-left: 10px;
+}
+
+.appointment-card-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.appointment-card-actions .btn {
+  flex: 1;
+  min-width: 80px;
+  justify-content: center;
+}
+
+@media (max-width: 480px) {
+  .appointment-list {
+    padding: 10px;
+  }
+  
+  .appointment-list-header h2 {
+    font-size: 1.2rem;
   }
   
   .btn {
-    font-size: 12px;
-    padding: 6px 12px;
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+  
+  .appointment-card {
+    padding: 12px;
+  }
+  
+  .appointment-card-actions {
+    gap: 6px;
+  }
+  
+  .appointment-card-actions .btn {
+    font-size: 11px;
+    padding: 6px 10px;
   }
 }

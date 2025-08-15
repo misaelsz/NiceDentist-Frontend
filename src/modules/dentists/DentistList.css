@@ -277,6 +277,21 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+  .dentist-list {
+    padding: 1.5rem;
+  }
+  
+  .dentist-table table {
+    font-size: 0.9rem;
+  }
+  
+  .dentist-table th,
+  .dentist-table td {
+    padding: 0.75rem;
+  }
+}
+
 @media (max-width: 768px) {
   .dentist-list {
     padding: 1rem;
@@ -287,25 +302,144 @@
     gap: 1rem;
     align-items: stretch;
   }
+  
+  .dentist-list-header h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
 
   .dentist-search form {
     flex-direction: column;
+    max-width: 100%;
   }
 
+  /* Hide table on mobile */
   .dentist-table {
-    overflow-x: auto;
+    display: none;
   }
-
-  .dentist-table table {
-    min-width: 800px;
-  }
-
-  .action-buttons {
-    flex-direction: column;
+  
+  /* Show cards on mobile */
+  .dentist-cards {
+    display: block;
   }
 
   .pagination {
     flex-direction: column;
     gap: 0.5rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .dentist-cards {
+    display: none;
+  }
+}
+
+/* Mobile card layout */
+.dentist-cards {
+  display: none;
+  gap: 1rem;
+}
+
+.dentist-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  border: 1px solid #e2e8f0;
+}
+
+.dentist-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.dentist-card-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+}
+
+.dentist-card-body {
+  margin-bottom: 1.5rem;
+}
+
+.dentist-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.dentist-card-label {
+  font-weight: 500;
+  color: #718096;
+}
+
+.dentist-card-value {
+  color: #2d3748;
+  text-align: right;
+  max-width: 60%;
+  word-wrap: break-word;
+}
+
+.dentist-card-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.dentist-card-actions .edit-button,
+.dentist-card-actions .delete-button {
+  flex: 1;
+  text-align: center;
+  padding: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .dentist-list {
+    padding: 0.75rem;
+  }
+  
+  .dentist-card {
+    padding: 1rem;
+  }
+  
+  .dentist-card-header {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+  
+  .dentist-card-name {
+    font-size: 1rem;
+  }
+  
+  .dentist-card-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .dentist-card-value {
+    max-width: 100%;
+    text-align: left;
+  }
+  
+  .dentist-card-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .create-button,
+  .search-button {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.95rem;
   }
 }
